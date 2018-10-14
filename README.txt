@@ -1,0 +1,2 @@
+-Permite ver, crear y editar proyectos hechos en diferentes tecnologias.
+-Esta hecho con el MEAN.
