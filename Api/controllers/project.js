@@ -94,9 +94,10 @@ var controller = {
             var filePath = req.files.image.path;
             var fileSplit = filePath.split('\\');
             var fileName = fileSplit[1];
+            
             var extSplit = fileName.split('\.');
             var fileExt = extSplit[1];
-            fileName='enra al req.files';
+            
             if (fileExt == 'png' || fileExt == 'jpg' || fileExt == 'jpeg' || fileExt == 'gif') {
 
                 Project.findByIdAndUpdate(projectId, { image: fileName }, { new: true }, (err, projectUpdated) => {
@@ -111,7 +112,7 @@ var controller = {
             }
 
             // console.log(req.files);
-            return res.status(200).send({ files: req.files });
+            // return res.status(200).send({ files: req.files });
         } else {
             // console.log(req.files);
             return res.status(200).send({ files: fileName });
