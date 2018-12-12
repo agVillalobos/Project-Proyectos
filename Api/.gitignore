@@ -8,8 +8,7 @@
 # dependencies
 /node_modules
 
-# imagenes
-/uploads
+
 
 # IDEs and editors
 /.idea
