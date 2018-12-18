@@ -1,0 +1,19 @@
+{
+  "name": "building-a-serverless-rest-api-with-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "offline": "sls offline start --skipCacheInvalidation"
+  },
+  "keywords": [],
+  "author": "Adnan Rahić",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless-offline": "^3.16.0"
+  },
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "mongoose": "^5.0.0-rc0"
+  }
+}
