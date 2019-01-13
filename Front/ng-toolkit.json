@@ -1,0 +1,12 @@
+{
+  "serverless": {
+    "provider": "aws",
+    "skipInstall": false,
+    "directory": ".",
+    "project": "proyecto-angular",
+    "serverless": {
+      "aws": {},
+      "gcloud": {}
+    }
+  }
+}
