@@ -1,3 +1,3 @@
 export var Global={
-    url: 'http://localhost:3000/api/projects/'
+    url: 'https://zudu2tfs6g.execute-api.us-east-1.amazonaws.com/production/api/projects/'
 };
