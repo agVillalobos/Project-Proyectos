@@ -8,8 +8,7 @@
 # dependencies
 /node_modules
 
-# assets
-/src/assets
+package-lock.json
 
 # IDEs and editors
 /.idea

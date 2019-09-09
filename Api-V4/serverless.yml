@@ -1,4 +1,4 @@
-service: sls-express-mongodb
+service: Proyectos
 
 custom:
   secrets: ${file(secrets.json)}
