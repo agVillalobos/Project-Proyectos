@@ -1,12 +1,12 @@
 'use strict'
 
 var express= require('express');
-var ProjectController = require('../controllers/project');
+var ProjectController = require('../../controllers/project');
 
 var router = express.Router();
 
 var multipart = require('connect-multiparty');
-var multipartMiddleware = multipart({uploadDir: './uploads'})
+var multipartMiddleware = multipart({uploadDir: 'https://s3.amazonaws.com/proyectos-uploads-aws/images/'});
 
 router.get('/home', ProjectController.home);
 router.post('/test', ProjectController.test);
