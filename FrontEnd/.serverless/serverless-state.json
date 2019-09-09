@@ -1,17 +1,17 @@
 {
   "service": {
-    "service": "Proyects",
+    "service": "Proyects-FrontEnd",
     "serviceObject": {
-      "name": "Proyects"
+      "name": "Proyects-FrontEnd"
     },
     "provider": {
       "stage": "production",
+      "region": "us-east-1",
       "variableSyntax": "\\${([ ~:a-zA-Z0-9._@'\",\\-\\/\\(\\)*]+?)}",
       "name": "aws",
       "runtime": "nodejs8.10",
       "memorySize": 192,
       "timeout": 10,
-      "region": "us-east-1",
       "versionFunctions": true,
       "remoteFunctionData": null,
       "compiledCloudFormationTemplate": {
@@ -35,7 +35,7 @@
           "ApiLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/Proyects-production-api"
+              "LogGroupName": "/aws/lambda/Proyects-FrontEnd-production-api"
             }
           },
           "IamRoleLambdaExecution": {
@@ -64,7 +64,7 @@
                       "-",
                       [
                         "production",
-                        "Proyects",
+                        "Proyects-FrontEnd",
                         "lambda"
                       ]
                     ]
@@ -79,7 +79,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Proyects-production*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Proyects-FrontEnd-production-api:*"
                           }
                         ]
                       },
@@ -90,7 +90,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Proyects-production*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Proyects-FrontEnd-production-api:*:*"
                           }
                         ]
                       }
@@ -103,11 +103,9 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "Proyects",
+                    "Proyects-FrontEnd",
                     "production",
-                    {
-                      "Ref": "AWS::Region"
-                    },
+                    "us-east-1",
                     "lambdaRole"
                   ]
                 ]
@@ -121,9 +119,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/Proyects/production/1568065991985-2019-09-09T21:53:11.985Z/Proyects.zip"
+                "S3Key": "serverless/Proyects-FrontEnd/production/1568068083071-2019-09-09T22:28:03.071Z/Proyects-FrontEnd.zip"
               },
-              "FunctionName": "Proyects-production-api",
+              "FunctionName": "Proyects-FrontEnd-production-api",
               "Handler": "lambda.universal",
               "MemorySize": 192,
               "Role": {
@@ -140,20 +138,20 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "ApiLambdaVersionRR72h6oL50dtksUSyrevjmf0QlLyVP3m94QEXB0BzY": {
+          "ApiLambdaVersion450EM2yhorNkGgiU56SDrOVu6GGFVdyFtWK4h2x5G2s": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "5Tm8B/bHjTmufQM90cszKmbO7IstCTkmFkwZB3Yjq8c="
+              "CodeSha256": "jKUIylZTyBWpfMk9XWXXzx/MLX+X95KEOEivfaA0HZw="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "production-Proyects",
+              "Name": "production-Proyects-FrontEnd",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -265,7 +263,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1568065433425": {
+          "ApiGatewayDeployment1568067721018": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -288,7 +286,17 @@
                 ]
               },
               "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
+              "Principal": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "apigateway.",
+                    {
+                      "Ref": "AWS::URLSuffix"
+                    }
+                  ]
+                ]
+              },
               "SourceArn": {
                 "Fn::Join": [
                   "",
@@ -325,7 +333,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionRR72h6oL50dtksUSyrevjmf0QlLyVP3m94QEXB0BzY"
+              "Ref": "ApiLambdaVersion450EM2yhorNkGgiU56SDrOVu6GGFVdyFtWK4h2x5G2s"
             }
           },
           "ServiceEndpoint": {
@@ -338,11 +346,7 @@
                   {
                     "Ref": "ApiGatewayRestApi"
                   },
-                  ".execute-api.",
-                  {
-                    "Ref": "AWS::Region"
-                  },
-                  ".",
+                  ".execute-api.us-east-1.",
                   {
                     "Ref": "AWS::URLSuffix"
                   },
@@ -404,7 +408,7 @@
             "http": "ANY /"
           }
         ],
-        "name": "Proyects-production-api",
+        "name": "Proyects-FrontEnd-production-api",
         "package": {},
         "memory": 192,
         "timeout": 10,
@@ -412,12 +416,11 @@
         "vpc": {}
       }
     },
-    "serviceFilename": "serverless.yml",
     "layers": {},
-    "artifact": "C:\\Projects\\GitHub\\Proyectos\\Front\\.serverless\\Proyects.zip"
+    "artifact": "C:\\Projects\\GitHub\\Proyectos\\FrontEnd\\.serverless\\Proyects-FrontEnd.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/Proyects/production/1568065991985-2019-09-09T21:53:11.985Z",
-    "artifact": "Proyects.zip"
+    "artifactDirectoryName": "serverless/Proyects-FrontEnd/production/1568068083071-2019-09-09T22:28:03.071Z",
+    "artifact": "Proyects-FrontEnd.zip"
   }
 }
