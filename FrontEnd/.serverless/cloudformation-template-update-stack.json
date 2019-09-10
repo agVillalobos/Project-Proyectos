@@ -19,7 +19,7 @@
     "ApiLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/Proyects-FrontEnd-production-api"
+        "LogGroupName": "/aws/lambda/Proyects-FrontEnd1-production-api"
       }
     },
     "IamRoleLambdaExecution": {
@@ -48,7 +48,7 @@
                 "-",
                 [
                   "production",
-                  "Proyects-FrontEnd",
+                  "Proyects-FrontEnd1",
                   "lambda"
                 ]
               ]
@@ -63,7 +63,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Proyects-FrontEnd-production-api:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Proyects-FrontEnd1-production-api:*"
                     }
                   ]
                 },
@@ -74,7 +74,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Proyects-FrontEnd-production-api:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/Proyects-FrontEnd1-production-api:*:*"
                     }
                   ]
                 }
@@ -87,7 +87,7 @@
           "Fn::Join": [
             "-",
             [
-              "Proyects-FrontEnd",
+              "Proyects-FrontEnd1",
               "production",
               "us-east-1",
               "lambdaRole"
@@ -103,9 +103,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/Proyects-FrontEnd/production/1568068083071-2019-09-09T22:28:03.071Z/Proyects-FrontEnd.zip"
+          "S3Key": "serverless/Proyects-FrontEnd1/production/1568133638605-2019-09-10T16:40:38.605Z/Proyects-FrontEnd1.zip"
         },
-        "FunctionName": "Proyects-FrontEnd-production-api",
+        "FunctionName": "Proyects-FrontEnd1-production-api",
         "Handler": "lambda.universal",
         "MemorySize": 192,
         "Role": {
@@ -122,20 +122,20 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "ApiLambdaVersion450EM2yhorNkGgiU56SDrOVu6GGFVdyFtWK4h2x5G2s": {
+    "ApiLambdaVersionY6gg756CS1fQBeZcSHZFb6h3IwGxEqJ2hy3F0kM2xY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "jKUIylZTyBWpfMk9XWXXzx/MLX+X95KEOEivfaA0HZw="
+        "CodeSha256": "7mm5A7e2zST8cgv3eaf8xKzkXLklxR7SxJ+dMpXiyqg="
       }
     },
     "ApiGatewayRestApi": {
       "Type": "AWS::ApiGateway::RestApi",
       "Properties": {
-        "Name": "production-Proyects-FrontEnd",
+        "Name": "production-Proyects-FrontEnd1",
         "EndpointConfiguration": {
           "Types": [
             "EDGE"
@@ -247,7 +247,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1568067721018": {
+    "ApiGatewayDeployment1568133487801": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -317,7 +317,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersion450EM2yhorNkGgiU56SDrOVu6GGFVdyFtWK4h2x5G2s"
+        "Ref": "ApiLambdaVersionY6gg756CS1fQBeZcSHZFb6h3IwGxEqJ2hy3F0kM2xY"
       }
     },
     "ServiceEndpoint": {
