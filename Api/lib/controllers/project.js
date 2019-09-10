@@ -65,6 +65,8 @@ var controller = {
     updateProject: function (req, res) {
         var projectId = req.params.id;
         var update = req.body;
+        console.log(update.name);
+        console.log(update.description);
 
         Project.findByIdAndUpdate(projectId, update, { new: true }, (err, projectUpdated) => {
             if (err) return res.status(500).send({ message: 'Error al guardar' });
