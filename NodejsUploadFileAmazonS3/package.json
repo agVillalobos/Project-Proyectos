@@ -1,0 +1,28 @@
+{
+  "name": "nodejsuploadfileamazons3",
+  "version": "1.0.0",
+  "description": "Node.js Express RestAPIs upload file to Amazon S3 using Multer, AWS-SDK",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Nodejs",
+    "Express",
+    "Amazon",
+    "S3",
+    "RestAPI",
+    "Upload",
+    "File",
+    "Multer",
+    "Aws",
+    "SDK"
+  ],
+  "author": "grokonez.com",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.302.0",
+    "express": "^4.16.3",
+    "multer": "^1.3.1"
+  }
+}

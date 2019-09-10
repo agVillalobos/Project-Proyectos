@@ -5,8 +5,7 @@ var ProjectController = require('../../controllers/project');
 
 var router = express.Router();
 
-var multipart = require('connect-multiparty');
-var multipartMiddleware = multipart({uploadDir: 'https://s3.amazonaws.com/proyectos-uploads-aws/images/'});
+let upload = require('../../config/multer.config.js');
 
 router.get('/home', ProjectController.home);
 router.post('/test', ProjectController.test);
@@ -15,7 +14,7 @@ router.get('/project/:id?', ProjectController.getProject);
 router.get('/projects', ProjectController.getProjects);
 router.put('/project/:id', ProjectController.updateProject);
 router.delete('/project/:id', ProjectController.deleteProject);
-router.post('/upload-image/:id',multipartMiddleware, ProjectController.uploadImage);
+router.post('/upload-image/:id', upload.single("file"), ProjectController.uploadImage);
 router.get('/get-image/:image', ProjectController.getImageFile);
 
 module.exports = router;

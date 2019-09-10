@@ -3,7 +3,8 @@
 var Project = require('../models/project');
 var fs = require('fs');
 var path = require('path');
-
+const s3 = require('../config/s3.config.js');
+var stream = require('stream');
 var controller = {
     home: function (req, res) {
         return res.status(200).send({ message: 'Soy la home' });
@@ -87,36 +88,36 @@ var controller = {
     },
 
     uploadImage: function (req, res) {
+        const s3Client = s3.s3Client;
+        const params = s3.uploadParams;
         var projectId = req.params.id;
-        var fileName = 'imagen no subida ' + req.files +'';
 
-        if (req.files) {
-            var filePath = req.files.image.path;
-            var fileSplit = filePath.split('\\');
-            var fileName = fileSplit[1];
-            
-            var extSplit = fileName.split('\.');
-            var fileExt = extSplit[1];
-            
-            if (fileExt == 'png' || fileExt == 'jpg' || fileExt == 'jpeg' || fileExt == 'gif') {
+        console.log(req.file);
+        params.Key = req.file.originalname;
+        params.Body = req.file.buffer;
+        params.ContentType = req.file.mimetype;
 
-                Project.findByIdAndUpdate(projectId, { image: fileName }, { new: true }, (err, projectUpdated) => {
-                    if (err) return res.status(500).send({ message: 'Error al guardar' });
-
-                    if (!projectUpdated) return res.status(404).send({ message: 'El proyecto no existe' });
-
-                    return res.status(200).send({ project: projectUpdated });
-                });
-            }else{
-                fs.unlink(filePath, (err)=>{ return res.status(200).send({message: "la extension no es valida."})});
+        s3Client.upload(params, (err, data) => {
+            if (err) {
+                res.status(500).json({error:"Error -> " + err});
             }
 
-            // console.log(req.files);
-            // return res.status(200).send({ files: req.files });
-        } else {
-            // console.log(req.files);
-            return res.status(200).send({ files: fileName });
-        }
+            Project.findById(projectId, (err, project) => {
+                if (err) return res.status(500).send({ message: 'Error al guardar' });
+    
+                if (!project) return res.status(404).send({ message: 'El proyecto no existe' });
+                
+                var update = project;
+                update.image = data.Location;
+                Project.findByIdAndUpdate(projectId, update, { new: true }, (err, projectUpdated) => {
+                    if (err) return res.status(500).send({ message: 'Error al guardar' });
+        
+                    if (!projectUpdated) return res.status(404).send({ message: 'El proyecto no existe' });
+        
+                    return res.status(200).send({ project: projectUpdated });
+                });
+            });
+        });
     },
 
     getImageFile: function(req,res){
