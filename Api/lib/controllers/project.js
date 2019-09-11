@@ -21,7 +21,8 @@ var controller = {
         project.description = params.description;
         project.category = params.category;
         project.year = params.year;
-        project.image = null;
+        project.langs = params.langs;
+        project.image = params.image;
 
         project.save((err, projectStored) => {
             if (err) return res.status(500).send({ message: 'Error al guardar' });
