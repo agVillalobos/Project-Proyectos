@@ -8,7 +8,9 @@ exports.doUpload = (req, res) => {
 	
 	params.Key = req.file.originalname;
 	params.Body = req.file.buffer;
-		
+	params.ContentType = req.file.mimetype;
+		console.log(params);
+		console.log(s3Client);
 	s3Client.upload(params, (err, data) => {
 		if (err) {
 			res.status(500).json({error:"Error -> " + err});

@@ -11,7 +11,7 @@ const uploadParams = {
          Bucket: env.Bucket, 
          Key: '', // pass key
          Body: null, // pass file body
-         ACL:'public-read-write'
+         ACL:'public-read'
 };
  
 const s3 = {};
