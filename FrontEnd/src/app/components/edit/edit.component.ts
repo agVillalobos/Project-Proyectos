@@ -16,7 +16,7 @@ export class EditComponent implements OnInit {
   public title: string;
   public project: Project;
   public status: string;
-  public filesToUpload: Array<File>;
+  public filesToUpload: File;
   public url: string;
   public save_project;
 
@@ -51,32 +51,41 @@ export class EditComponent implements OnInit {
   }
 
   onSubmit() {
-    this._projectService.updateProject(this.project).subscribe(
-      response => {
-        if (response.project) {
-          console.log(response);
-
-          if (this.filesToUpload) {
-            //Subir imagen
-            this._uploadService.makeFileRequest(Global.url + "upload-image/" + response.project._id, [], this.filesToUpload, 'image')
-              .then((result: any) => {
-                // console.log(result);
-                this.save_project = result.project;
-                this.status = 'success';
-              });
-          } else {
+    if (this.filesToUpload) {
+      //Subir imagen
+      this._uploadService.makeFileRequest(Global.url , [], this.filesToUpload, 'image')
+        .then((result: any) => {
+          if(result && result.Location){
+            this.project.image = result.Location;
+            this._projectService.updateProject(this.project).subscribe(
+              response => {
+                if (response.project) {
+                  this.save_project = response.project;
+                  this.status = 'success';
+                } else {
+                  this.status = 'failed';
+                }
+              },
+              error => {
+                this.status = 'failed';
+                console.log(<any>error);
+              }
+            );
+        }
+        });
+    } else {
+      this._projectService.updateProject(this.project).subscribe(
+        response => {
+          if (response.project) {
             this.save_project = response.project;
             this.status = 'success';
+          }else{
+            this.status = 'failed';
           }
-        } else {
-          this.status = 'failed';
-        }
-      },
-      error => { console.log(<any>error) }
-    );
+    });
   }
-
+  }
   fileChangeEvent(fileInput: any) {
-    this.filesToUpload = <Array<File>>fileInput.target.files;
+    this.filesToUpload = <File>fileInput.target.files;
   }
 }

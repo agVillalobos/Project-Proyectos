@@ -1,4 +1,4 @@
-<!-- <div class="container" *ngIf="project">
+<div class="container" *ngIf="project">
   <h2>{{title}}</h2>
 
   <div class="message success" *ngIf="status == 'success'">
@@ -42,7 +42,7 @@
     <p>
       <label for="image">Imagen</label>
       <span class="image" *ngIf="project.image" style="float:none;">
-          <img src="{{url+'get-image/'+project.image}}" *ngIf="project.image" style="width:100px;"/>
+          <img src="{{project.image}}" *ngIf="project.image" style="width:100px;"/>
       </span><br/>
       <input type="file" name="image"  placeholder="Subir imagen" (change)="fileChangeEvent($event)"/>
     </p>
@@ -50,4 +50,4 @@
     <input type="submit" value="Enviar" [disabled]="!projectForm.form.valid" />
   </form>
 
-</div> -->
+</div>
