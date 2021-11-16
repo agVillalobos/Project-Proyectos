@@ -33,7 +33,7 @@
     "@ng-toolkit/universal": "^1.1.21",
     "@types/aws-sdk": "^2.7.0",
     "@webpack-cli/init": "^0.2.2",
-    "aws-sdk": "^2.527.0",
+    "aws-sdk": "^2.814.0",
     "aws-serverless-express": "^3.2.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
